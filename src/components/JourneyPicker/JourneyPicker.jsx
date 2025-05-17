@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import './style.css';
 
-//
+//Pokračujte v komponentě JourneyPicker. Do tlačítka „Vyhledat spoj“ přidejte atribut disabled tak, aby tlačítko bylo povolené pouze v případě, že jsou vybrána obě města i datum. Vyzkoušejte, že povolení/zakázání tlačítka správně funguje.
+
 export const JourneyPicker = ({ onJourneyChange }) => {
   const [fromCity, setFromCity] = useState('');
   const [toCity, setToCity] = useState('');
@@ -25,11 +26,14 @@ export const JourneyPicker = ({ onJourneyChange }) => {
     fetchDates();
   }, []);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(fromCity);
-    console.log(toCity);
-    console.log(date);
+    const response = await fetch(
+      `https://apps.kodim.cz/daweb/leviexpress/api/journey?fromCity=${fromCity}&toCity=${toCity}&date=${date}`,
+    );
+    const responseData = await response.json();
+
+    onJourneyChange(responseData.results);
   };
 
   return (
@@ -72,7 +76,11 @@ export const JourneyPicker = ({ onJourneyChange }) => {
               </select>
             </label>
             <div className="journey-picker__controls">
-              <button className="btn" type="submit">
+              <button
+                className="btn"
+                type="submit"
+                disabled={fromCity === '' || toCity === '' || date === ''}
+              >
                 Vyhledat spoj
               </button>
             </div>
