@@ -18,8 +18,6 @@ export const ReservationPage = () => {
     fetchTicketDetail();
   }, []);
 
-  console.log('Co je v data', reservation);
-
   return (
     reservation && (
       <div className="reservation container">
