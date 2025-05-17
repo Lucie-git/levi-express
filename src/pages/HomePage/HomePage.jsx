@@ -1,4 +1,4 @@
-import { JourneyPicker } from '../../components/JourneyPicker';
+import { JourneyPicker } from '../../components/JourneyPicker/JourneyPicker';
 
 export const HomePage = () => {
   return (
