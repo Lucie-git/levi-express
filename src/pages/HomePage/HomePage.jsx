@@ -6,7 +6,7 @@ import { SeatPicker } from '../../components/SeatPicker/SeatPicker';
 
 export const HomePage = () => {
   const [journey, setJourney] = useState(null);
-
+  console.log(journey);
   const navigate = useNavigate();
 
   const handleJourneyChange = (journeyData) => {
@@ -35,14 +35,14 @@ export const HomePage = () => {
       {journey && (
         <>
           <JourneyDetail journey={journey} />
+          <SeatPicker seats={journey.seats} />
+          <div className="controls container">
+            <button className="btn btn--big" type="button" onClick={handleBuy}>
+              Rezervovat
+            </button>
+          </div>
         </>
       )}
-      <SeatPicker />
-      <div className="controls container">
-        <button className="btn btn--big" type="button" onClick={handleBuy}>
-          Rezervovat
-        </button>
-      </div>
     </main>
   );
 };
